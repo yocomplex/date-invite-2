@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en" class="loading">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#2b1038">
+  <meta name="robots" content="noindex, nofollow">
+  <title>My Melody's Haunted Mansion</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Fredoka:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="loader" role="status" aria-live="polite">
+    <div class="ld-bg2"></div>
+    <div class="ld-bg"></div>
+    <div class="ld-inner">
+      <div class="ld-pumpkin" aria-hidden="true"><span class="base">🎃</span><span class="fill" id="ldFill">🎃</span></div>
+      <div class="ld-count"><span id="ldNum">0</span>%</div>
+      <p class="ld-label" id="ldLabel">loading the mansion</p>
+      <button class="btn" id="ldEnter" type="button" hidden>tap to enter 🎃</button>
+    </div>
+  </div>
+
+  <div class="sky" aria-hidden="true">
+    <span class="moon">🌕</span>
+    <span class="bat b1">🦇</span><span class="bat b2">🦇</span><span class="bat b3">🦇</span>
+    <span class="web">🕸️</span>
+    <span class="pumpkin p1">🎃</span><span class="pumpkin p2">🎃</span><span class="pumpkin p3">🕯️</span>
+  </div>
+
+  <main id="app" hidden>
+    <nav class="dots" id="dots" aria-label="Progress"></nav>
+
+    <!-- 1. Foyer -->
+    <section class="room" id="foyer" data-room>
+      <h1 class="title">My Melody's<br>Haunted Mansion</h1>
+      <div class="hero">
+        <div class="rings" aria-hidden="true"><i></i><i></i><i></i></div>
+        <span class="boo layer" style="--d:22" aria-hidden="true">boo!</span>
+        <span class="blob layer b-pink" style="--d:-30" aria-hidden="true"></span>
+        <span class="blob layer b-orange" style="--d:40" aria-hidden="true"></span>
+        <span class="blob layer b-purple" style="--d:-55" aria-hidden="true"></span>
+        <span class="orb layer o1" style="--d:60" aria-hidden="true">🎃</span>
+        <span class="orb layer o2" style="--d:-48" aria-hidden="true">👻</span>
+        <span class="orb layer o3" style="--d:75" aria-hidden="true">🦇</span>
+        <span class="orb layer o4" style="--d:-70" aria-hidden="true">✨</span>
+        <span class="orb layer o5" style="--d:36" aria-hidden="true">🍬</span>
+        <img class="melody float" src="assets/my-melody.png" alt="My Melody" width="212" height="360">
+      </div>
+      <p class="speech">hi dani! the mansion is haunted and only <b>you</b> can finish tonight's challenges.</p>
+      <p class="small">five rooms and two rounds. im is competing too. the winner gets bragging rights :P</p>
+      <button class="btn" data-next>open the creaky noor 🚪</button>
+    </section>
+
+    <!-- 4. Library -->
+    <section class="room" id="library" data-room hidden>
+      <h2 class="title sm">The Haunted Library</h2>
+      <p class="small" id="quizCount"></p>
+      <div class="bar" aria-hidden="true"><i id="barFill"></i></div>
+      <div id="quiz"></div>
+    </section>
+
+    <!-- 4b. Hot takes -->
+    <section class="room" id="takes" data-room hidden>
+      <h2 class="title sm">dani's undeniably favorite takes</h2>
+      <p class="small">Not scored. The Sarcasm Detector is just curious.</p>
+      <div id="takeList"></div>
+      <button class="btn" id="takesNext" disabled>On to the arcade 🕹️</button>
+    </section>
+
+    <!-- 5. Arcade -->
+    <section class="room" id="arcade" data-room hidden>
+      <h2 class="title sm">The Ballroom Arcade</h2>
+      <p class="speech" id="arcadeIntro"></p>
+      <div class="hud"><span>👻 <b id="score">0</b></span><span>⏱ <b id="time">20</b>s</span></div>
+      <div class="arena" id="arena" aria-label="Game area"></div>
+      <button class="btn" id="arcadeStart">Start 🎮</button>
+      <button class="btn" id="arcadeNext" hidden>See who won 🔮</button>
+    </section>
+
+    <!-- 6. Result -->
+    <section class="room" id="result" data-room hidden>
+      <h2 class="title sm">The Crystal Ball</h2>
+      <div class="ball" id="ball">🔮</div>
+      <div class="scoreboard" id="scoreboard"></div>
+      <p class="speech" id="verdict"></p>
+      <div class="card" id="prizeCard">
+        <h3>prizes!</h3>
+        <p class="small">Pick as many as you like. Anything you leave unticked is off the table, and either of us can change our mind anytime, no questions asked.</p>
+        <div id="prizeList" class="checks"></div>
+      </div>
+      <button class="btn" id="resultNext">One last thing 💌</button>
+    </section>
+
+    <!-- 7. Date -->
+    <section class="room" id="date" data-room hidden>
+      <h2 class="title sm">The Invitation</h2>
+      <div class="card invite">
+        <p class="small">bosh would like to take you on a</p>
+        <p class="big">pumpkin patch date 🎃</p>
+        <p class="small">first, a pumpkin patch with a ferris wheel and then we'll see where it goes from there 😼</p>
+      </div>
+      <div class="choice-row">
+        <button class="chip big-chip" data-rsvp="yes">Yes, I'm in 🎃</button>
+        <button class="chip big-chip" data-rsvp="no">Not this time</button>
+      </div>
+      <div id="dateFields" hidden>
+        <h3>Which day works?</h3>
+        <p class="small">Pick one or both.</p>
+        <div class="chips" id="dateChips"></div>
+        <h3>What time?</h3>
+        <p class="small">Meet-up time between 4 and 7 PM.</p>
+        <div class="chips" id="timeChips"></div>
+      </div>
+      <label class="note" id="noteWrap" hidden>
+        <span class="small">Anything I should know? (optional)</span>
+        <textarea id="note" rows="3" maxlength="500" placeholder="Allergies, a different time, a better idea..."></textarea>
+      </label>
+      <p class="error" id="err" role="alert" hidden></p>
+      <button class="btn" id="send" disabled>Send to bosh 🦇</button>
+    </section>
+
+    <!-- 8. Done -->
+    <section class="room" id="done" data-room hidden>
+      <img class="melody float" src="assets/my-melody.png" alt="My Melody" width="212" height="360">
+      <h2 class="title sm" id="doneTitle"></h2>
+      <p class="speech" id="doneText"></p>
+      <div class="card" id="recap"></div>
+    </section>
+  </main>
+
+  <footer class="credit">© made with luv 💗 by BBB</footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/fx.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/intro.js"></script>
+</body>
+</html>
